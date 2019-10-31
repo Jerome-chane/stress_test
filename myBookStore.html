@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <link rel='stylesheet' type='text/css' href='./main.css'>
+    <title>My Book Store</title>
+</head>
+<h1></h1>
+
+<body>
+
+    <main id="myBookStore">
+
+        <header>
+            <div id="header" class="container justify-content-around">
+                <!-- contains logo and serach bar -->
+                <div class="row">
+                    <div id="logo" class="col-6">
+                        <!-- my logo here -->
+                        <img class="logo" alt="book logo" src="./image/Screen Shot 2019-10-25 at 10.30.39 AM.png">
+                    </div>
+                    <div class="col-6" id="search-bar">
+                        <!-- my search bar here -->
+
+                        <div class="search-bar">
+                            <input id="input" type="text" v-model="research"
+                                placeholder="Search for title or description..." /> <button class="button fa fa-search"
+                                v-on:click=" filt()">Search</button>
+
+                        </div>
+
+                        <div class="language">
+                            <select class="custom-select-sm" v-on:change="filt()" v-model="selectedLanguage">
+                                <option value="">All languages</option>
+                                <option value="en">English</option>
+                                <option value="es">Spanish</option>
+                                <option value="ca">Catalan</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <!--End of header Row-->
+            </div> <!-- end of header div-->
+        </header>
+
+        <!-- ------------------------------------------------------------------------- -->
+        <div class="books">
+            <!-- Contains my books in several columns and rows -->
+            <p v-if="books.length === 0" class="loader"></p>
+            <p class="alert alert-warning" v-if="books.length > 0 && filtered.length === 0">No match Found</p>
+
+
+
+            <div class="gallery">
+
+
+                <div class="gallery-panel flip_container" v-for="cover in filtered">
+                    <!-- flip container-->
+
+                    <div class="flip">
+
+                        <div class="flip_front">
+                            <div class="card">
+                                <div class="">
+
+                                    <img v-bind:src="cover.cover" class="card-img-top">
+                                </div>
+                                <!--card body-->
+                            </div>
+                            <!--card-->
+                        </div>
+                        <!--flip front-->
+
+
+                        <div class="flip_back">
+                            <div class="card">
+                                <div class="back">
+                                    <h3>{{cover.title}}</h3>
+                                    <p>{{cover.description}}</p>
+
+                                    <a data-fancybox="gallery" class="button" :href="cover.detail">View<img
+                                            :src="cover.detail"></a>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--flip Back-->
+                    </div>
+                    <!--flip-->
+                </div> <!-- flip container-->
+
+            </div>
+            <!--End of Gallery Panel-->
+
+
+        </div>
+
+        <!-- ------------------------------------------------------------------------- -->
+
+
+
+        <footer>
+            <!-- Optional-->
+        </footer>
+
+
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
